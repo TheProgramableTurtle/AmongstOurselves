@@ -1,6 +1,7 @@
-# packet.py - Created for Ejected by TheProgramableTurtle, Pr0x1mas and coder-carvey - 20/11/2020
+# packet.py - Created by TheProgramableTurtle - 20/11/2020
 from src.common import *
-from src import payload
+from src.parser import payload
+from src.parser import packed
 
 
 class Packet:
@@ -15,8 +16,6 @@ class Packet:
 
     def decode(self):
         self.opcode = int(self.payload.readBytes(1).hex(), 16)
-
-        print(self.opcode)
 
         if self.opcode == 0x00:
             self.decodeUnreliable()
@@ -65,7 +64,8 @@ class Packet:
         nonce = self.payload.readBytes(2)
         hazelVer = self.payload.readBytes(1)
         clientVer = self.payload.readBytes(4)
-        usernameLen = self.payload.readBytes(1)
+        usernameLen = packed.PackedInt(self.payload.payload, self.payload.byte).decoded
+        # usernameLen = self.payload.readBytes(1)
         username = self.payload.readBytes()
 
         self.data = {

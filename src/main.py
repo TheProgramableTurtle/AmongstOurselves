@@ -1,8 +1,8 @@
-# main.py - Created for Ejected by TheProgramableTurtle, Pr0x1mas, and coder-carvey - 20/11/2020
+# main.py - Created by TheProgramableTurtle - 20/11/2020
 
 from src.common import *
-from src import server
-from src import packet
+from src.server import server
+from src.parser import packet
 
 
 class ThreadMain(threading.Thread):
