@@ -17,17 +17,17 @@ class Packet:
     def decode(self):
         self.opcode = int(self.payload.readBytes(1).hex(), 16)
 
-        if self.opcode == 0x00:
+        if self.opcode == PacketID.Unreliable:
             self.decodeUnreliable()
-        elif self.opcode == 0x01:
+        elif self.opcode == PacketID.Reliable:
             self.decodeReliable()
-        elif self.opcode == 0x08:
+        elif self.opcode == PacketID.Hello:
             self.decodeHello()
-        elif self.opcode == 0x09:
+        elif self.opcode == PacketID.Disconnect:
             self.decodeDisconnect()
-        elif self.opcode == 0x0a:
+        elif self.opcode == PacketID.Acknowledge:
             self.decodeAcknowledge()
-        elif self.opcode == 0x0c:
+        elif self.opcode == PacketID.Ping:
             self.decodePing()
         else:
             sys.exit(2)
